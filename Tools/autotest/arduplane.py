@@ -55,7 +55,7 @@ class AutoTestPlane(vehicle_test_suite.TestSuite):
 
     @staticmethod
     def get_normal_armable_modes_list():
-        return ["MANUAL", "STABILIZE", "ACRO"]
+        return ["MANUAL", "STABILIZE", "ACRO", "INTERCEPT"]
 
     def log_name(self):
         return "ArduPlane"

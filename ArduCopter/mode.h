@@ -3,6 +3,9 @@
 #include "Copter.h"
 #include <AP_Math/chirp.h>
 #include <AP_ExternalControl/AP_ExternalControl_config.h> // TODO why is this needed if Copter.h includes this
+#include <AC_Simulink/inter_acc_controller.h>
+#include <AC_Guidance/guidance_law.h>
+
 class Parameters;
 class ParametersG2;
 
@@ -1565,6 +1568,8 @@ protected:
     const char *name4() const override { return "STAB"; }
 
 private:
+    inter_acc_controller controller;
+    guidance_law guidance;
 
 };
 

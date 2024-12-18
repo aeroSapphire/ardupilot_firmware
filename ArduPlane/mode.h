@@ -9,6 +9,8 @@
 #include "quadplane.h"
 #include <AP_AHRS/AP_AHRS.h>
 #include <AP_Mission/AP_Mission.h>
+#include <AC_Simulink/inter_acc_controller.h>
+#include <AC_Guidance/guidance_law.h>
 
 class AC_PosControl;
 class AC_AttitudeControl_Multi;
@@ -39,6 +41,7 @@ public:
         AVOID_ADSB    = 14,
         GUIDED        = 15,
         INITIALISING  = 16,
+        INTERCEPT     = 26,
 #if HAL_QUADPLANE_ENABLED
         QSTABILIZE    = 17,
         QHOVER        = 18,
@@ -440,6 +443,23 @@ public:
 
 private:
     void stabilize_stick_mixing_direct();
+    inter_acc_controller controller;
+    guidance_law guidance;
+
+};
+
+class ModeIntercept : public Mode
+{
+public:
+
+    Number mode_number() const override { return Number::INTERCEPT; }
+    const char *name() const override { return "INTERCEPT"; }
+    const char *name4() const override { return "INTERCEPT"; }
+
+    // methods that affect movement of the vehicle in this mode
+    void update() override;
+
+    void run() override;
 
 };
 

@@ -28,6 +28,7 @@ void Plane::failsafe_short_on_event(enum failsafe_state fstype, ModeReason reaso
     {
     case Mode::Number::MANUAL:
     case Mode::Number::STABILIZE:
+    case Mode::Number::INTERCEPT:
     case Mode::Number::ACRO:
     case Mode::Number::FLY_BY_WIRE_A:
     case Mode::Number::AUTOTUNE:
@@ -126,6 +127,7 @@ void Plane::failsafe_long_on_event(enum failsafe_state fstype, ModeReason reason
     case Mode::Number::LOITER:
     case Mode::Number::THERMAL:
     case Mode::Number::TAKEOFF:
+    case Mode::Number::INTERCEPT:
         if (plane.flight_stage == AP_FixedWing::FlightStage::TAKEOFF && !(g.fs_action_long == FS_ACTION_LONG_GLIDE || g.fs_action_long == FS_ACTION_LONG_PARACHUTE)) {
             // don't failsafe if in inital climb of TAKEOFF mode and FS action is not parachute or glide
             // long failsafe will be re-called if still in fs after initial climb
